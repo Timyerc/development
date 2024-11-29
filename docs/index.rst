@@ -60,6 +60,7 @@
    VSCode/常用插件
    VSCode/FAQ
    VSCode/VSCode常用快捷键
+   VSCode/VSCode用CMSIS_configuration wizard头文件配置向导
 
 .. toctree::
    :maxdepth: 2
