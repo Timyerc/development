@@ -96,6 +96,7 @@
    Test/蓝牙调试工具固件下载
    Test/串口调试工具的使用
    msp-protocol/README
+   Protocol/串口MSP协议
 
 .. toctree::
    :maxdepth: 2
