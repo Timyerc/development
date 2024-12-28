@@ -40,25 +40,6 @@ python -m pip install xlsxwriter
 执行如下脚本：
 
 ```
-utils\gen-fabs.bat 总的项目名称
-utils\gen-fabs.bat 总的项目名称\具体的电路板
-
-例子：
-utils\gen-fabs.bat EGS-01
-utils\gen-fabs.bat EGS-01\cleanrobot-square-main
-```
-如需生成嘉立创SMT下单文件，执行如下脚本：
-
-```
-utils\gen-fabs.bat 总的项目名称 jlc
-utils\gen-fabs.bat 总的项目名称\具体的电路板 jlc
-
-例子：
-utils\gen-fabs.bat EGS-01 jlc
-utils\gen-fabs.bat EGS-01\cleanrobot-square-main jlc
-```
-
-如果只指定总的项目名称（例：`EGS-01`），则会生成这个项目所有电路板的生产文件；如果指定了项目下的具体的电路板（例：`EGS-01\cleanrobot-square-main`），则只会生成这个电路板的生产文件。
 
 查看log信息，确定是否有报错
 
