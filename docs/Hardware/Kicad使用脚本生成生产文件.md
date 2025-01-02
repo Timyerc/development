@@ -40,25 +40,14 @@ python -m pip install xlsxwriter
 执行如下脚本：
 
 ```
-utils\gen-fabs.bat 总的项目名称
-utils\gen-fabs.bat 总的项目名称\具体的电路板
-
-例子：
-utils\gen-fabs.bat EGS-01
-utils\gen-fabs.bat EGS-01\cleanrobot-square-main
-```
-如需生成嘉立创SMT下单文件，执行如下脚本：
-
-```
-utils\gen-fabs.bat 总的项目名称 jlc
-utils\gen-fabs.bat 总的项目名称\具体的电路板 jlc
-
-例子：
-utils\gen-fabs.bat EGS-01 jlc
-utils\gen-fabs.bat EGS-01\cleanrobot-square-main jlc
-```
-
-如果只指定总的项目名称（例：`EGS-01`），则会生成这个项目所有电路板的生产文件；如果指定了项目下的具体的电路板（例：`EGS-01\cleanrobot-square-main`），则只会生成这个电路板的生产文件。
+*python utils\ci.py fab -----用于生成生产文件
+*python utils\ci.py rc -----用于检测erc或drc
+*python utils\ci.py rc 原理图文件名/PCB文件名 -----检测原理图erc/PCBdrc
+*python utils\ci.py fab 文件名/文件夹名 -----生成文件对应板子的生产文件/文件夹内所以板子的生产文件
+*python utils\ci.py fab -t tag名-----生成tag对应板子的生产文件
+*python utils\ci.py fab 文件名 -n/-ncs-----生成文件对应板子的生产文件,且BOM带不贴的器件
+*python utils\ci.py fab 文件名 -j/-jlc-----生成文件对应板子的嘉立创下单生产文件
+*python utils\ci.py fab -f 文件名/文件名 文件名 文件名-----生成指定的一个或多个PCB生产文件
 
 查看log信息，确定是否有报错
 
