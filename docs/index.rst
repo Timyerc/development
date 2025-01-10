@@ -82,6 +82,7 @@
    :caption: GNU
 
    GNU/install-arm-none-eabi-gcc
+   GNU/install-make
    GNU/ld
 
 .. toctree::
