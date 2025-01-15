@@ -76,6 +76,7 @@
    Test/XW16Pro白色烧录器生成烧录文件(服务端)
    Test/XW16Pro白色烧录器提取程序(客户端)
    OTA/OTA固件升级
+   Keil/J-Link设备工具包使用
 
 .. toctree::
    :maxdepth: 2
