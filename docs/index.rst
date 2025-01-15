@@ -61,6 +61,7 @@
    VSCode/FAQ
    VSCode/VSCode常用快捷键
    VSCode/VSCode用CMSIS_configuration wizard头文件配置向导
+   VSCode/VSCode调试配置
 
 .. toctree::
    :maxdepth: 2
