@@ -24,6 +24,8 @@ $ git clone https://github.com/cpputest/cpputest.git
 
 ### 编译并添加到系统环境变量
 
+确保系统已安装更新，并安装以下依赖库：`autoconf, libtool, make, gcc, g++`
+
 ```
 $ cd cpputest \
 $ autoreconf . -i
