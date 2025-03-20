@@ -94,11 +94,11 @@ Library\kicad_dr_2_m\kicad_dr_2_m.kicad_pcb
 ![image](image/kicad-design-spec-custom-rule-1.png)
 
 ## PCB封装设计规范
-●焊盘使用datasheet中layout guide的设计
-●Fab层为焊盘大小                         w=0.1mm
-●Silkscreen层距焊盘 0.11mm       w=0.12mm
-●Courtyard层距焊盘 0.25mm       w=0.05mm
-●一脚标识--丝印层用三角形,fab层用0.8mm的缺口
+* 焊盘使用datasheet中layout guide的设计
+* Fab层为焊盘大小                         w=0.1mm
+* Silkscreen层距焊盘 0.11mm       w=0.12mm
+* Courtyard层距焊盘 0.25mm       w=0.05mm
+* 一脚标识--丝印层用三角形,fab层用0.8mm的缺口
 
 参考如下文档：
 

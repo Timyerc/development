@@ -110,7 +110,8 @@
    :caption: 硬件
 
    Hardware/kicad8.0在3D图中隐藏部分元器件
-   Hardware/Kicad在3D Viewer中隐藏部分元器件
+   Hardware/板厂制程
+   Hardware/对应封装3d创建
    Hardware/Kicad使用脚本生成生产文件
    Hardware/硬件开发流程
    Hardware/Kicad设计规范
