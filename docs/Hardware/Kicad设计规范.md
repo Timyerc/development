@@ -155,7 +155,7 @@ Pad Length = Lead Length + Toe + Heel
 
 ---
 
-## 🔧 举个例子：SOP-8（1.27mm pitch）
+### 🔧 举个例子：SOP-8（1.27mm pitch）
 
 | 参数           | 典型值 |
 |----------------|--------|
@@ -168,12 +168,8 @@ Pad Length = Lead Length + Toe + Heel
 
 ---
 
-## 🧩 KiCad 中如何设置：
+### 🧩 KiCad 中如何设置：
 
 - 设置焊盘层级：**F.Paste, F.Mask, F.Cu**
 - 添加 Courtyard：**F.CrtYd**，外扩 0.25~0.5mm
 - 添加丝印层（F.SilkS）要避开焊盘区
-
----
-
-如果你有具体的 SOP 封装尺寸（比如厂商的 PDF 数据手册），我可以根据那个规格帮你精确算出焊盘尺寸。要不要来一个具体型号，我帮你算？
