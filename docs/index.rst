@@ -129,6 +129,7 @@
 
    FAQ/常见问题
    FAQ/方形机常见问题
+   FAQ/指示灯说明
    FAQ/应广烧录器芯片烧录固件验证方法
 
 Indices and tables
