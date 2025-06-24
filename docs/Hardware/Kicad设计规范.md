@@ -103,3 +103,78 @@ Library\kicad_dr_2_m\kicad_dr_2_m.kicad_pcb
 参考如下文档：
 
 [如何新建封装](https://docs.kicad.org/8.0/zh/getting_started_in_kicad/getting_started_in_kicad.html#%E6%96%B0%E5%BB%BA%E5%B0%81%E8%A3%85)
+
+[Kicad Library Conventions](https://klc.kicad.org/footprint/f5/f5.2.html)
+
+### 丝印层（Silkcreen）
+
+- 线径：0.12mm
+- 距离Fab层：0.11mm
+- 距离铜皮：0.2mm
+
+### 制造层（Fab）
+
+- 线径：0.1mm
+- 为元器件的外形，通常使用中间值
+
+### 外框层（Courtyart）
+
+- 线径：0.05mm
+
+- 距离Fab层：
+  - 正常为0.25mm
+  - 比0603小的封装可以缩小为0.15mm
+  - 连接器为0.5mm
+
+## ✅ IPC-7351B 中 SOP 封装的焊盘设计标准
+
+IPC-7351B 中将封装分为三种密度等级（Density Level）：
+- **Level A**：宽松型（适用于手工焊接或维修）
+- **Level B**：普通型（默认，适用于大多数消费电子）
+- **Level C**：紧凑型（适用于高密度布板）
+
+### 📏 SOP 封装的标准焊盘参数（以 Level B 为例）
+
+#### 焊盘长度（Pad Length）计算方式：
+
+```
+Pad Length = Lead Length + Toe + Heel
+```
+
+其中：
+- **Lead Length**：引脚本身的长度
+- **Toe（前伸）**：引脚超出焊盘的部分（推荐 0.5mm 左右）
+- **Heel（回缩）**：焊盘缩进部分，用于支撑引脚末端（推荐 0.25mm 左右）
+
+#### 焊盘宽度（Pad Width）：
+
+- 通常比引脚宽度大一些，例如：
+  ```
+  Pad Width = Lead Width + 0.2mm（左右间隙）
+  ```
+
+#### 焊盘间距：
+
+- 参考引脚间距（pitch）设计，**Pad-to-Pad 间距 = pitch - Pad Width**
+- 例如 SOP-8，pitch 是 1.27mm，引脚宽度 0.4mm，Pad Width 可取 0.5mm，Pad 间距就为 0.77mm。
+
+---
+
+### 🔧 举个例子：SOP-8（1.27mm pitch）
+
+| 参数           | 典型值 |
+|----------------|--------|
+| 引脚宽度       | 0.4mm  |
+| 引脚长度       | 1.0mm  |
+| 焊盘宽度       | 0.5mm  |
+| 焊盘长度       | 1.5mm（含前伸 + 后缩） |
+| 焊盘间距（中心）| 1.27mm |
+| Courtyard 间距 | 0.25mm（从引脚外缘向外扩展）|
+
+---
+
+### 🧩 KiCad 中如何设置：
+
+- 设置焊盘层级：**F.Paste, F.Mask, F.Cu**
+- 添加 Courtyard：**F.CrtYd**，外扩 0.25~0.5mm
+- 添加丝印层（F.SilkS）要避开焊盘区

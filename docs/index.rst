@@ -61,6 +61,7 @@
    VSCode/FAQ
    VSCode/VSCode常用快捷键
    VSCode/VSCode用CMSIS_configuration wizard头文件配置向导
+   VSCode/VSCode调试配置
 
 .. toctree::
    :maxdepth: 2
@@ -76,12 +77,14 @@
    Test/XW16Pro白色烧录器生成烧录文件(服务端)
    Test/XW16Pro白色烧录器提取程序(客户端)
    OTA/OTA固件升级
+   Keil/J-Link设备工具包使用
 
 .. toctree::
    :maxdepth: 2
    :caption: GNU
 
    GNU/install-arm-none-eabi-gcc
+   GNU/install-make
    GNU/ld
 
 .. toctree::
@@ -104,6 +107,7 @@
    Test/蓝牙调试工具固件下载
    Test/串口调试工具的使用
    msp-protocol/README
+   Protocol/串口MSP协议
 
 .. toctree::
    :maxdepth: 2
@@ -126,6 +130,7 @@
 
    FAQ/常见问题
    FAQ/方形机常见问题
+   FAQ/指示灯说明
    FAQ/应广烧录器芯片烧录固件验证方法
 
 Indices and tables

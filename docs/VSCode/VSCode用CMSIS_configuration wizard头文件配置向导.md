@@ -1,11 +1,21 @@
 # VSCode用CMSIS_Configuration_Wizard头文件向导
 
-### Configuration_Wizard使用规则
-* 配置向导注释由注释项和注释修饰符组成。它们为配置文件在IDE中创建类似GUI的元素（参见工具特定的显示）。使用类似GUI的方式可以使用户更容易检查和调整配置文件以满足应用需求。以下规则适用：配置向导部分必须在代码的前100行内开始，并且必须以以下注释行开始和结束
-~~~
-    // <<< Use Configuration Wizard in Context Menu >>>
-    // <<< end of configuration section >>>
-~~~
+胡洋悦（yangyue.hu@ovobot.cc）
+
+翻译整理自[https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/configWizard.html](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/configWizard.html)
+
+## Configuration_Wizard使用规则
+
+配置向导注释由注释项和注释修饰符组成。它们为配置文件在IDE中创建类似GUI的元素。使用类似GUI的方式可以使用户更容易检查和调整配置文件以满足应用需求。以下是注释规则的详细描述：
+
+* 配置向导部分必须从前 100 行代码开始，并且必须以以下注释行开头：
+    ```
+        // <<< Use Configuration Wizard in Context Menu >>>
+    ```
+* 配置向导部分可以以以下可选注释结束：
+    ```
+        // <<< end of configuration section >>>
+    ```
 
 * 注释以代码中的注释形式编写。每一行注释必须以双斜杠（//）开头
 * 默认情况下，紧随注释之后的下一个代码符号将被修改
@@ -16,7 +26,7 @@
 * 在配置向导行中，除非用于包含注释项，否则不能使用 < 或 > 符号
 * 下表列出了配置向导的注释项目、修饰符及其对应的功能：
 
-|    项目	|文本	|描述 |
+| **注释项** | **文本** | **描述** |
 | ---------|-------| ----- |
 |  \<h> |	是	|标题。创建一个标题部分。所有被 \<h> 和 \</h> 包含的项目和选项属于一个组，可以展开。此条目不修改代码符号，只用于分组其他项目和修饰符<pre><code>// &lt;h&gt;Thread Configuration -- header without checkbox to group other items<br>// ...<br>// &lt;/h&gt;</code></pre> |
 | \<e>*+ |	是|	启用的标题。创建一个带复选框的标题部分，复选框用于启用或禁用被 \<e> 和 \</e> 包含的所有项目和选项。 <pre><code>// &lt;e&gt;Round-Robin Thread switching                       -- header with checkbox<br>// ===============================<br>//<br><br>// &lt;i&gt; Enables Round-Robin Thread switching.             -- tooltip information for the header<br>#ifndef OS_ROBIN<br>#define OS_ROBIN 1                                       -- this value is set through the checkbox<br>#endif<br>// &lt;o&gt;Round-Robin Timeout [ticks] &lt;1-1000&gt;<br>// &lt;i&gt; Defines how long a thread will execute before a thread switch.<br>// &lt;i&gt; Default: 5<br>#ifndef OS_ROBINTOUT<br>#define OS_ROBINTOUT 5<br>#endif<br>// &lt;/e&gt;</code></pre>|
@@ -32,6 +42,7 @@
 | \<o.x..y>*+ |	是 |	修改位范围（例如：\<o.4..5> - 修改第4到5位）。<pre><code>//   &lt;h&gt;String Settings<br>//   &lt;i&gt;These settings are used to create the String Descriptor.<br>//     &lt;o.0..15&gt;Language ID &lt;0x0000-0xFCFF&gt;<br>//     &lt;i&gt;English (United States) = 0x0409.<br>//   &lt;/h&gt;<br>#define USBD0_STR_DESC_LANGID           0x0409</code></pre>|
 | \<s>*+ |	是 |	带有ASCII字符串输入的选项。 <pre><code>//  &lt;s&gt;Manufacturer String<br>//  &lt;i&gt;String Descriptor describing Manufacturer.<br>#define USBD0_STR_DESC_MAN              L"Keil Software"</code></pre>|
 | \<s.i>*+ |	是 |	带有字符限制的ASCII字符串输入选项。<pre><code>//  &lt;s.126&gt;Manufacturer String<br>//  &lt;i&gt;String Descriptor describing Manufacturer.<br>#define USBD0_STR_DESC_MAN              L"Keil Software"</code></pre> |
+| **注释修饰符** |  | **描述** |
 | \<0-31> |	否 |	表示选项字段的值范围|
 | \<0-100:10> |	否 |	表示选项字段的值范围，步长为 10|
 | \<0x40-0x1000:0x10> |	否 |	表示十六进制格式的值范围，步长为 10|
@@ -40,9 +51,10 @@
 | \<#+1>   <#-1> <#*8>   <#/3> |	否 |修改输入或显示的值，使用操作符（加、减、乘、除）。修改后的值将被赋给代码符号。<pre><code>// &lt;o&gt;Default Thread stack size [bytes] &lt;64-4096:8&gt;&lt;#/4&gt;<br>// &lt;i&gt; Defines default stack size for threads with osThreadDef stacksz = 0<br>// &lt;i&gt; Default: 200<br>#ifndef OS_STKSIZE<br>#define OS_STKSIZE 50<br>#endif</code></pre> |
 
 
-### 示例代码
+## 示例代码
+
 * 你可以将代码复制到 C 文件中，并在 uVision 编辑器中查看结果
-~~~
+```
 // <<< Use Configuration Wizard in Context Menu >>>
 
 // <h> 产测配置
@@ -962,9 +974,9 @@
 //</h>
 
 // <<< end of configuration section >>>
-~~~
+```
 
-### VSCode 安装 EIDE插件
+## VSCode 安装 EIDE插件
 
 * 安装 EIDE插件
 
