@@ -37,17 +37,75 @@ python -m pip install xlsxwriter
 
 ![image](image/kicad-script-gen-fabs-7.png)
 
-执行如下脚本：
+### 在工程根目录执行如下脚本查看命令帮助
 
 ```
-*python utils\ci.py fab -----用于生成生产文件
-*python utils\ci.py rc -----用于检测erc或drc
-*python utils\ci.py rc 原理图文件名/PCB文件名 -----检测原理图erc/PCBdrc
-*python utils\ci.py fab 文件名/文件夹名 -----生成文件对应板子的生产文件/文件夹内所以板子的生产文件
-*python utils\ci.py fab -t tag名-----生成tag对应板子的生产文件
-*python utils\ci.py fab 文件名 -n/-ncs-----生成文件对应板子的生产文件,且BOM带不贴的器件
-*python utils\ci.py fab 文件名 -j/-jlc-----生成文件对应板子的嘉立创下单生产文件
-*python utils\ci.py fab -f 文件名/文件名 文件名 文件名-----生成指定的一个或多个PCB生产文件
+> python .\utils\ci.py -h
+usage: ci.py [-h] {rc,fab,pdf} ...
+
+PCB设计CI脚本
+
+positional arguments:
+  {rc,fab,pdf}  子命令
+    rc          检测原理图ERC, 或者PCB DRC
+    fab         生成生产文件, 如BOM, GERBER, 坐标, 贴片图等
+    pdf         生成带水印的原理图、PCB和BOM的PDF文件
+
+options:
+  -h, --help    show this help message and exit
+```
+
+ci.py有三个子命令，分别是rc, fab和pdf。 rc用于检测原理图ERC, 或者PCB DRC；fab用于生成生产文件, 如BOM, GERBER, 坐标, 贴片图等；pdf用于生成带水印的原理图、PCB和BOM的PDF文件。
+
+每个子命令的使用方法可以查看子命令的帮助：
+
+```
+python utils\ci.py 子命令 -h
+```
+
+例如：
+
+```
+> python .\utils\ci.py fab -h
+usage: ci.py fab [-h] [-t TAG] [-n] [-j] [-f FILE_LIST [FILE_LIST ...]] [folder]
+
+positional arguments:
+  folder                生成对应文件夹下或所有子文件夹下的PCB的生产文件
+
+options:
+  -h, --help            show this help message and exit
+  -t TAG, --tag TAG     生成tag对应的PCB生产文件, 不用输入文件或者文件夹名
+  -n, --ncs             BOM输出不贴的元器件
+  -j, --jlc             生成嘉立创贴片相关资料
+  -f FILE_LIST [FILE_LIST ...], --file_list FILE_LIST [FILE_LIST ...]
+                        一个或者多个PCB文件
+```
+
+### 使用举例
+
+#### 生成EGS-01项目下的所有板子的生产文件
+
+```
+python .\utils\ci.py fab EGS-01
+```
+
+#### 生成EGS-01项目下主板的生产文件
+
+```
+python .\utils\ci.py fab EGS-01\cleanrobot-square-main
+```
+
+#### 生成EGS-01项目下主板的嘉立创生产文件
+
+```
+python .\utils\ci.py fab -j EGS-01\cleanrobot-square-main
+```
+
+#### 生成指定tag的生产文件
+
+```
+python .\utils\ci.py fab -t egs-01-main-v0.5
+```
 
 查看log信息，确定是否有报错
 
@@ -61,3 +119,28 @@ python -m pip install xlsxwriter
 6. 指示生成Gerber
 7. 指示生成坐标文件
 8. 指示生成贴片图
+
+## 生成带水印的原理图、PCB和BOM文件
+
+安装依赖库：
+
+```
+python -m pip install pymupdf
+
+python -m pip install --upgrade pywin32
+```
+
+在工程根目录执行如下命令：
+
+```
+# 生成项目下的所有电路板资料
+python utils\ci.py pdf 总的项目名称
+
+# 生成项目下的指定的电路板资料
+python utils\ci.py pdf 总的项目名称\具体的电路板
+
+例子：
+python utils\ci.py pdf EHDS-01
+
+python utils\ci.py pdf EHDS-01\cleanrobot-square-main
+```
