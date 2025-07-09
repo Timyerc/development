@@ -108,6 +108,7 @@
    Test/串口调试工具的使用
    msp-protocol/README
    Protocol/串口MSP协议
+   Test/STM32的SGS认证测试流程
 
 .. toctree::
    :maxdepth: 2
