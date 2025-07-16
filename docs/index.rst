@@ -62,6 +62,7 @@
    VSCode/VSCode常用快捷键
    VSCode/VSCode用CMSIS_configuration wizard头文件配置向导
    VSCode/VSCode调试配置
+   VSCode/VSCode在使用Cortex-Debug调试中查看芯片外设寄存器值
 
 .. toctree::
    :maxdepth: 2
