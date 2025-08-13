@@ -19,6 +19,18 @@ python -m pip install --upgrade setuptools
 python -m pip install pycryptodome
 ```
 
+### 5、将UV4.exe路径添加到系统环境变量里面，步骤如下图所示：
+
+![image](images/uv4-path1.png)
+
+![image](images/uv4-path2.png)
+
+### 6、从共享盘里面找到srecord安装包，安装到电脑后，配置srecord到系统环境变量里面，步骤如下图所示：
+
+![image](images/srecord-file.png)
+
+![image](images/srecord-path.png)
+
 ## OTA固件生成
 
 ***注意：如果主板芯片是HK32的，主板程序需要用烧录器烧录进去再测试。***
