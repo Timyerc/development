@@ -25,6 +25,8 @@ C:\Program Files\KiCad\版本\bin\
 
 ```
 python -m pip install xlsxwriter
+python -m pip install pymupdf
+python -m pip install --upgrade pywin32
 ```
 
 ![image](image/kicad-script-gen-fabs-6.png)
@@ -121,14 +123,6 @@ python .\utils\ci.py fab -t egs-01-main-v0.5
 8. 指示生成贴片图
 
 ## 生成带水印的原理图、PCB和BOM文件
-
-安装依赖库：
-
-```
-python -m pip install pymupdf
-
-python -m pip install --upgrade pywin32
-```
 
 在工程根目录执行如下命令：
 
