@@ -10,8 +10,8 @@
    :maxdepth: 2
    :caption: 文档
 
+   Document/如何新建文档
    Document/MarkDown使用教程
-   Document/sphinx文档二次开发教程
 
 .. toctree::
    :maxdepth: 2
