@@ -37,7 +37,7 @@
 
 ![image](images\图片6.png)
 
-# 4、VS Code添加，仿真测试
+# 4、VS Code添加自定义MCU进行仿真测试
 
 ![](images\图片7.png)
 
