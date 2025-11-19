@@ -4,47 +4,19 @@
 
 GCC (GNU Compiler Collection) 是一个功能强大的编译器套件，支持多种编程语言。本文档介绍 GCC 最常用和重要的编译命令及其功能，以及makefile的优化方式。
 
-## 基本编译流程
-
-GCC 的编译过程分为四个阶段：
-
-1. **预处理** - 展开头文件、宏定义等
-
-2. **编译** - 将 C 代码转换为汇编代码
-
-3. **汇编** - 将汇编代码转换为机器代码
-
-4. **链接** - 将目标文件与库文件链接成可执行文件
-
 ## 常用命令选项
 
 ### 1. 基础编译命令
 
-**编译单个文件，生成 a.out**
+gcc main.c  #编译单个文件，生成 a.out
+gcc main.c -o myApp #编译并指定输出文件名
 
-gcc main.c
+### 2. 基本编译流程
 
-**编译并指定输出文件名**
-
-gcc main.c -o myApp
-
-### 2. 分步编译命令
-
-1.**预处理**：展开头文件、宏等
-
-gcc -E main.c -o main.i
-
-2.**编译**：生成汇编代码
-
-gcc -S main.i -o main.s
-
-3.**汇编**：生成目标文件
-
-gcc -c main.s -o main.o
-
-4.**链接**：生成可执行文件
-
-gcc main.o -o myApp
+**1.预处理** gcc -E main.c -o main.i - 展开头文件、宏定义等。
+**2.编译**     gcc -S main.i -o main.s - 将 C 代码转换为汇编代码。 
+**3.汇编**     gcc -c main.s -o main.o- 将汇编代码转换为机器代码。
+**4.链接**     gcc main.o -o main- 将目标文件与库文件链接成可执行文件。
 
 ### 3. 多文件编译
 
@@ -75,24 +47,24 @@ gcc -L /path/to/libs main.c -lmylib -o myApp# 指定库路径并链接
 
 **包含调试信息**
 
-gcc -g main.c -o myApp
+gcc -g main.c -o myApp           # -g 通过仿真器可调试
 
 **优化级别**
 
-gcc -O0 main.c -o myApp        # 不优化（默认，适合调试）
-gcc -O1 main.c -o myApp        # 基本优化
-gcc -O2 main.c -o myApp        # 高度优化（推荐）
-gcc -O3 main.c -o myApp        # 激进优化
-gcc -Os main.c -o myApp        # 优化代码大小
-gcc -Ofast main.c -o myApp   # 最高级别的优化（可能不严格遵循标准）
+gcc -O0 main.c -o myApp        # -O0不优化（默认，适合调试）
+gcc -O1 main.c -o myApp        # -O1基本优化
+gcc -O2 main.c -o myApp        # -O2高度优化（推荐）
+gcc -O3 main.c -o myApp        # -O3激进优化
+gcc -Os main.c -o myApp        # -O4优化代码大小
+gcc -Ofast main.c -o myApp   # -Ofast最高级别的优化（可能不严格遵循标准）
 
 ### 6. 警告控制
 
 **显示警告信息**
 
-gcc -Wall main.c -o myApp# 开启常用警告
-gcc -Wall -Wextra main.c -o myApp# 开启更多警告
-gcc -Wall -Werror main.c -o myApp# 将警告视为错误
+gcc -Wall main.c -o myApp                # 开启常用警告
+gcc -Wall -Wextra main.c -o myApp # 开启更多警告
+gcc -Wall -Werror main.c -o myApp # 将警告视为错误
 
 ### 7. 宏定义
 
@@ -138,6 +110,8 @@ gcc -Wall -Wextra -g -O0 -I ./include main.c helper.c utils.c -L ./lib -lmylib -
 - 在 Linux/macOS 下，可执行文件没有扩展名
 
 - 在 Windows 下，可执行文件通常有 `.exe` 扩展名
+
+- 在 ARM裸机 下，可执行文件通常有 `.bin\.hex\.elf` 扩展名
 
 - 使用 `-Werror` 可以确保代码没有任何警告
 
