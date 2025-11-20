@@ -8,76 +8,98 @@ GCC (GNU Compiler Collection) 是一个功能强大的编译器套件，支持�
 
 ### 1. 基础编译命令
 
-gcc main.c  #编译单个文件，生成 a.out
-gcc main.c -o myApp #编译并指定输出文件名
+~~~
+gcc main.c              #编译单个文件，生成 a.out
+gcc main.c -o myApp     #编译并指定输出文件名
+~~~
 
 ### 2. 基本编译流程
 
-**1.预处理** gcc -E main.c -o main.i - 展开头文件、宏定义等。
-**2.编译**     gcc -S main.i -o main.s - 将 C 代码转换为汇编代码。 
-**3.汇编**     gcc -c main.s -o main.o- 将汇编代码转换为机器代码。
-**4.链接**     gcc main.o -o main- 将目标文件与库文件链接成可执行文件。
+~~~
+gcc -E main.c -o main.i     # 1.预处理 -展开头文件、宏定义等
+gcc -S main.i -o main.s     # 2.编译   -将 C 代码转换为汇编代码
+gcc -c main.s -o main.o     # 3.汇编   -将汇编代码转换为机器代码
+gcc main.o -o main          # 4.链接   -将目标文件与库文件链接成可执行文件
+~~~
 
 ### 3. 多文件编译
 
  方法一：分步编译（推荐用于大型项目）
 
+~~~
 gcc -c main.c -o main.o
 gcc -c helper.c -o helper.o
 gcc -c utils.c -o utils.o
 gcc main.o helper.o utils.o -o myApp
+~~~
 
 方法二：一次性编译
 
+~~~
 gcc main.c helper.c utils.c -o myApp
+~~~
 
 ### 4. 头文件和库文件处理
 
 **指定头文件搜索路径**
 
+~~~
 gcc -I /path/to/headers main.c -o myApp
 gcc -I ../include main.c -o myApp
+~~~
 
 **链接库文件**
 
-gcc main.c -lm -o myApp# 链接数学库
-gcc -L /path/to/libs main.c -lmylib -o myApp# 指定库路径并链接
+~~~
+gcc main.c -lm -o myApp                       # 链接数学库
+gcc -L /path/to/libs main.c -lmylib -o myApp  # 指定库路径并链接
+~~~
 
 ### 5. 调试和优化
 
 **包含调试信息**
 
-gcc -g main.c -o myApp           # -g 通过仿真器可调试
+~~~
+gcc -g main.c -o myApp         # -g 通过仿真器可调试
+~~~
 
 **优化级别**
 
+~~~
 gcc -O0 main.c -o myApp        # -O0不优化（默认，适合调试）
 gcc -O1 main.c -o myApp        # -O1基本优化
 gcc -O2 main.c -o myApp        # -O2高度优化（推荐）
 gcc -O3 main.c -o myApp        # -O3激进优化
 gcc -Os main.c -o myApp        # -O4优化代码大小
-gcc -Ofast main.c -o myApp   # -Ofast最高级别的优化（可能不严格遵循标准）
+gcc -Ofast main.c -o myApp     # -Ofast最高级别的优化（可能不严格遵循标准）
+~~~
 
 ### 6. 警告控制
 
 **显示警告信息**
 
-gcc -Wall main.c -o myApp                # 开启常用警告
-gcc -Wall -Wextra main.c -o myApp # 开启更多警告
-gcc -Wall -Werror main.c -o myApp # 将警告视为错误
+~~~
+gcc -Wall main.c -o myApp             # 开启常用警告
+gcc -Wall -Wextra main.c -o myApp     # 开启更多警告
+gcc -Wall -Werror main.c -o myApp     # 将警告视为错误
+~~~
 
 ### 7. 宏定义
 
 **在命令行中定义宏**
 
-gcc -DDEBUG main.c -o myApp# 相当于在代码中添加 #define DEBUG
-gcc -DVERSION=100 main.c -o myApp# 定义带值的宏
+~~~
+gcc -DDEBUG main.c -o myApp          # 相当于在代码中添加 #define DEBUG
+gcc -DVERSION=100 main.c -o myApp    # 定义带值的宏
+~~~
 
 # 综合示例
 
 ## 典型的开发调试编译命令
 
+~~~
 gcc -Wall -Wextra -g -O0 -I ./include main.c helper.c utils.c -L ./lib -lmylib -o myApp
+~~~
 
 **参数说明：**
 
@@ -116,3 +138,7 @@ gcc -Wall -Wextra -g -O0 -I ./include main.c helper.c utils.c -L ./lib -lmylib -
 - 使用 `-Werror` 可以确保代码没有任何警告
 
 - 链接库时注意库文件的顺序，依赖的库应该放在后面
+
+## 补充
+
+在线文档：https://gcc.gnu.org/onlinedocs/
