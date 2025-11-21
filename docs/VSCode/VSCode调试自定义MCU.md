@@ -2,11 +2,11 @@
 
 ## 1、获取芯片下载算法.FLM
 
-![image](images\图片1.png)
+![image](images/图片1.png)
 
 ## 2、在JLinkDevices.xml文件当中添加芯片描述和.FLM的相对路径
 
-![image](images\图片2.png)
+![image](images/图片2.png)
 
 ```
   <!--          -->
@@ -18,28 +18,19 @@
   </Device>
 ```
 
-<!-- Linsynix  -->
-
-<!--          -->
-
-<Device>
- <ChipInfo Vendor="Linsynix" Name="LCM32F067" WorkRAMAddr="0x20000000" WorkRAMSize="0x00002800" Core="JLINK_CORE_CORTEX_M0"/>
- <FlashBankInfo Name="Flash Block" BaseAddr="0x8000000" MaxSize="0x10000" Loader="Devices\Linsynix\Flash\LCM32F067_FLASH.FLM" LoaderType="FLASH_ALGO_TYPE_OPEN" AlwaysPresent="1"/>
- </Device>
-
 ## 3、使用J-FLASH下载测试
 
-![image](images\图片3.png)
+![image](images/图片3.png)
 
-![image](images\图片4.png)
+![image](images/图片4.png)
 
-![image](images\图片5.png)
+![image](images/图片5.png)
 
-![image](images\图片6.png)
+![image](images/图片6.png)
 
-# 4、VS Code添加自定义MCU进行仿真测试
+## 4、VS Code添加自定义MCU进行仿真测试
 
-![](images\图片7.png)
+![](images/图片7.png)
 
 ```
         {
@@ -62,7 +53,7 @@
         }
 ```
 
-## 注意事项：
+## 5、注意事项：
 
 1、此方法适用于V7.64版本及更早的JLINK版本
 

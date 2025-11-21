@@ -1,6 +1,6 @@
-# ODrive源码编译配置过程
+# ODrive源码编译流程
 
-## 环境搭建
+## 1、环境搭建
 
 1、安装Git，下载地址：[Git](https://git-scm.com/)
 
@@ -14,7 +14,7 @@
 
 6、获取GNU ARM Embedded Toolchain，下载地址：[Downloads | GNU Arm Embedded Toolchain Downloads – Arm Developer](https://developer.arm.com/downloads/-/gnu-rm)
 
-## 添加环境变量
+## 2、添加环境变量
 
 1、将获取到的tup、GUN MCU Eclipse、GNU ARM Embedded Toolchain解压并放到一个英文路径下。
 
@@ -24,11 +24,11 @@
 
 ![image](image/OdrivePATH3.png)
 
-## 环境测试
+## 3、环境测试
 
 1、新建终端，并打开Git Bash终端
 
-<img src="image/OdrivePATH1.png" title="" alt="image" width="309">
+![image](image/OdrivePATH1.png)
 
 2、添加Python支持库
 
@@ -36,7 +36,9 @@
 pip install PyYAML Jinja2 jsonschema
 ```
 
-![image](image/OdrivePATH10.png)3、 测试环境变量是否生效
+![image](image/OdrivePATH10.png)
+
+3、 测试环境变量是否生效
 
 ```
 $ arm-none-eabi-gcc --version
@@ -47,7 +49,7 @@ $ python --version              # should be 3.9 1or later
 
 ![image](image/OdrivePATH4.png)
 
-# 克隆ODrive的官方源码
+## 4、克隆ODrive的官方源码
 
 Odrive源码GitHub地址：[Verify two-factor authentication](https://github.com/odriverobotics/ODrive)
 
@@ -68,10 +70,10 @@ $make
 编译如果停在如下进度将legacy_protocol.cpp第499行修改为：
 
 ```
+//添加显式类型转换来消除歧义
 FIBRE_LOG(D) << "send packet: " << static_cast<const void*>(tx_buf_); 
 ```
 
-添加显式类型转换来消除歧义
 ![image](image/OdrivePATH7.png)
 
 再次编译，便可生成固件，但是python会提示comment命令不支持，create_can_dbc.py
