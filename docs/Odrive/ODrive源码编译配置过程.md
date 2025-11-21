@@ -53,11 +53,11 @@ $ python --version              # should be 3.9 1or later
 
 Odrive源码GitHub地址：[Verify two-factor authentication](https://github.com/odriverobotics/ODrive)
 
-1、依据Odrive开发板版本，配置tup.config
+**1、依据Odrive开发板版本，配置tup.config**
 
 ![image](image/OdrivePATH5.png)
 
-2、编译源码
+**2、编译源码**
 
 ```
 $cd Firmware/
@@ -66,8 +66,9 @@ $make
 
 ![image](image/OdrivePATH6.png)
 
-3、错误处理
-编译如果停在如下进度将legacy_protocol.cpp第499行修改为：
+**3、错误处理**
+
+1、编译如果停在如下进度将legacy_protocol.cpp第499行修改为：
 
 ```
 //添加显式类型转换来消除歧义
@@ -76,12 +77,12 @@ FIBRE_LOG(D) << "send packet: " << static_cast<const void*>(tx_buf_);
 
 ![image](image/OdrivePATH7.png)
 
-再次编译，便可生成固件，但是python会提示comment命令不支持，create_can_dbc.py
+2、再次编译，便可生成固件，但是python会提示comment命令不支持，create_can_dbc.py
 这个文件可能有多种关键字都不支持，这源于版本的不同，但不影响固件的生成
 在MakeFile注释掉对create_can_dbc.py的处理，再重新编译一次即可
 
 ![image](image/OdrivePATH8.png)
 
-完成编译
+**4、完成编译**
 
 ![image](image/OdrivePATH9.png)

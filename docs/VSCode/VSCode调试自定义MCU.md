@@ -1,12 +1,12 @@
-# VS Code通过J-LINK仿真自定义MCU
+# VSCode通过J-LINK仿真自定义MCU
 
 ## 1、获取芯片下载算法.FLM
 
-![image](images/图片1.png)
+![image](images/VsCodeMCU1.png)
 
 ## 2、在JLinkDevices.xml文件当中添加芯片描述和.FLM的相对路径
 
-![image](images/图片2.png)
+![image](images/VsCodeMCU2.png)
 
 ```
   <!--          -->
@@ -20,17 +20,17 @@
 
 ## 3、使用J-FLASH下载测试
 
-![image](images/图片3.png)
+![image](images/VsCodeMCU3.png)
 
-![image](images/图片4.png)
+![image](images/VsCodeMCU4.png)
 
-![image](images/图片5.png)
+![image](images/VsCodeMCU5.png)
 
-![image](images/图片6.png)
+![image](images/VsCodeMCU6.png)
 
 ## 4、VS Code添加自定义MCU进行仿真测试
 
-![](images/图片7.png)
+![image](images/VsCodeMCU7.png)
 
 ```
         {
