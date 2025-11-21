@@ -1,18 +1,22 @@
 # ODrve调试手册
 
-## 1、连接好电机线、制动电阻、电源线、USB、CAN调试工具
+## 1、准备工作
 
-![image](image\OdriveTest0.jpg)
+**1、连接好电机线、制动电阻、电源线、USB、CAN调试工具**
 
-## 2、下载固件
+![image](image/OdriveTest0.jpg)
 
-![](image\OdriveTest2.png)
+**2、下载固件**
 
-## 3、进入终端，打开Odrivetool工具，进行电机参数校准
+![image](image/OdriveTest2.png)
 
-![image](image\OdriveTest1.png)
+**3、进入终端，打开Odrivetool工具，进行电机参数校准**
 
-## 4、电机参数校准，通过Odrvtool工具进行
+![image](image/OdriveTest1.png)
+
+**4、电机参数校准，通过Odrvtool工具进行**
+
+## 2、通过Odrivetool配置驱动器
 
 **1、清除所有参数，恢复默认设置**
 
@@ -161,9 +165,11 @@ odrv0.axis1.requested_state = AXIS_STATE_CLOSED_LOOP_CONTROL #闭环模式
 ```
 
 **8、ODrive参数查询**
-通常情况下，设置类命令不带参数，即可查看设置值
+
+
 
 ```
+#通常情况下，设置类命令不带参数，即可查看设置值
 odrv0.axis0.encoder.config.hall_polarity_calibrated     #读取极性值
 
 odrv0.axis0.encoder.config.hall_phase_shift_calibrated  #读取相位值
@@ -187,6 +193,6 @@ odrv0.axis0.motor.current_control.Iq_measured           #查看M0电流
 odrv0.axis1.motor.current_control.Iq_measured           #查看M1电流
 ```
 
-## 5、补充
+## 3、补充
 
 ODrive手册：[Getting Started — ODrive Documentation 0.6.11 documentation](https://docs.odriverobotics.com/v/latest/guides/getting-started.html)
