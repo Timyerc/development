@@ -64,6 +64,8 @@
    VSCode/VSCode调试配置
    VSCode/VSCode在Cortex-debug调试中查看芯片外设寄存器值
    VSCode/VSCode使用GDB命令调试MCU
+   VSCode/VSCode调试自定义MCU
+
 .. toctree::
    :maxdepth: 2
    :caption: Keil
@@ -87,6 +89,7 @@
    GNU/install-arm-none-eabi-gcc
    GNU/install-make
    GNU/ld
+   GNU/gcc
 
 .. toctree::
    :maxdepth: 2
@@ -126,6 +129,14 @@
    Hardware/元器件类别编码
    Hardware/IC Selector
    Hardware/遥控器型号说明
+
+.. toctree::
+   :maxdepth: 2
+   :caption: ODrive
+
+   Odrive/ODrive源码编译配置过程
+   Odrive/ODrive配置手册
+   Odrive/ODive CAN调试手册
 
 .. toctree::
    :maxdepth: 2
