@@ -140,6 +140,12 @@
 
 .. toctree::
    :maxdepth: 2
+   :caption: roboLib
+
+   roboLib/roboLib使用教程
+
+.. toctree::
+   :maxdepth: 2
    :caption: FAQ
 
    FAQ/常见问题
