@@ -38,7 +38,9 @@
 | 值 | 名称 |
 | ----- | ---- |
 | 0x00 | DCODE_CORE |
-| 0x03 | DCODE_SOLAR_CLEANBOT (VER_HW) |
+| 0x03 | DCODE_CLEANROBOT (VER_HW) 擦窗机 |
+| 0x04 | DCODE_SOLAR_CLEANBOT (VER_HW) 光伏清洁机器人 |
+| 0x05 | DCODE_BLDC (VER_HW) 无刷电机 |
 
 ## 核心命令 Core Command
 
@@ -278,24 +280,24 @@ Simple response
 
 ### 擦窗机命令 Command
 
-| 值 | 指令名称 | 描述 |
-| ----- | ---- | ---- |
+| 值 | 指令名称 | 描述 | 圆形专用 | 方形专用 |
+| ----- | ---- | ---- | ---- | ---- |
 | 读取 |
 | 102 | MSP_RAW_IMU | 陀螺仪加速度原始值 |
-| 103 | MSP_DATA_POINT | 测试数据点 |
-| 104 | MSP_GYRO_DETECT | 陀螺仪撞边判断 |
-| 105 | MSP_EDGE_BOTTOM_DETECT | 底边检测 |
-| 106 | MSP_MACHINE_STATE | 机器工作状态，水平or竖直 |
-| 107 | MSP_THRESHOLD | 获取马达电流参数 |
+| 103 | MSP_DATA_POINT | 测试数据点，测试专用，数据格式可以修改 |
+| 104 | MSP_GYRO_DETECT | 陀螺仪撞边判断 | ✓ |
+| 105 | MSP_EDGE_BOTTOM_DETECT | 底边检测 | ✓ |
+| 106 | MSP_MACHINE_STATE | 机器工作状态，水平or竖直工作状态 |
+| 107 | MSP_THRESHOLD | 获取边轮马达电流参数 | ✓ |
 | 108 | MSP_ATTITUDE | 机器姿态角 |
 | 110 | MSP_ANALOG | AD数据 |
 | 111 | MSP_ADAPTER | 适配器电压 |
+| 113 | MSP_BARO_DIFF | 无边气压检测 |
 | 114 | MSP_WATER_BOX | 水量检测 |
 | 115 | MSP_WIFI_RSSI | WIFI产测结果 |
 | 116 | MSP_WIFI_TEST | WIFI开始产测 |
 | 117 | MSP_FAST_CURRENT | 直行电流判断 |
 | 118 | MSP_Z_TURN_FAST_CURRENT | Z字水平换行电流 |
-| 119 | MSP_BARO_DIFF | 无边气压检测 |
 | 120 | MSP_SYSTICK | 系统周期 |
 | 121 | MSP_OVO_WATER_DET | 水量检测 |
 | 122 | MSP_LEAK_DET | 无边检测 |
@@ -322,6 +324,220 @@ Simple response
 | 226 | MSP_SET_GYRO_THRESHOLD | 设置陀螺仪阈值 |
 
 ### 擦窗机命令细节
+
+#### MSP_RAW_IMU 102
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 102    | 0x00 |
+
+**接收：**
+
+| device | command | size | gyro x | gyro y | gyro z | acce x | acce y | acce z |
+| ------ | ------- | ---- | -------| -------| -------| -------| -------| -------|
+| 0x03   | 102    | 0x0C | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned |
+
+陀螺仪和加速度原始值，数值范围 -32767 ~ 32767
+
+#### MSP_DATA_POINT 103
+
+> 默认两个16位数据，根据调试需要可以修改数据长度
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 103    | 0x00 |
+
+**接收：**
+
+| device | command | size | data0 | data1 |
+| ------ | ------- | ---- | -----------| -----------|
+| 0x03   | 103    | 0x04 | 16 bit unsigned | 16 bit unsigned |
+
+#### MSP_GYRO_DETECT 104
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 104    | 0x00 |
+
+**接收：**
+
+| device | command | size | gyro diff | sample time |
+| ------ | ------- | ---- | -----------| -----------|
+| 0x03   | 104    | 0x04 | 16 bit signed | 16 bit unsigned |
+
+gyro diff: 陀螺仪变化值，用于观察机器在运行时陀螺仪的变化值，诊断机器误判原因
+
+sample time: 程序运行主循环的周期，单位0.1ms。
+
+#### MSP_EDGE_BOTTOM_DETECT 105
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 105    | 0x00 |
+
+**接收：**
+
+| device | command | size | gyro diff 1 | gyro diff 2 | gyro z |
+| ------ | ------- | ---- | -----------| -----------| -----------|
+| 0x03   | 105    | 0x06 | 16 bit signed | 16 bit signed | 16 bit unsigned |
+
+gyro diff 1: 陀螺仪变化值1
+
+gyro diff 2: 陀螺仪变化值2
+
+gyro z: 陀螺仪z轴原始值
+
+#### MSP_MACHINE_STATE 106
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 106    | 0x00 |
+
+**接收：**
+
+| device | command | size | state | acce x | acce y | acce z |
+| ------ | ------- | ---- | -----------| -----------| -----------| -----------|
+| 0x03   | 106    | 0x08 | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned |
+
+state: 机器状态；0，未知；1，水平工作状态；2，竖直工作状态；3，水平倒吸工作状态
+
+acce x: x轴加速度平均值
+
+acce y: x轴加速度平均值
+
+acce z: z轴加速度平均值
+
+#### MSP_THRESHOLD 107
+
+> 在使用`USE_FAN_LEVEL_DYNAMIC_COMP`功能时有效
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 107    | 0x00 |
+
+**接收：**
+
+| device | command | size | thres | min cnt | max cnt | pressure |
+| ------ | ------- | ---- | -----------| -----------| -----------| -----------|
+| 0x03   | 107    | 0x08 | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned |
+
+thres: 边轮ADC原始平均值
+
+min cnt: 平均值小于阈值次数
+
+max cnt: 平均值大于阈值次数
+
+pressure: 使用闭环吸力时，此值为目标负压值；否则为风机pwm值
+
+#### MSP_ATTITUDE 108
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 108    | 0x00 |
+
+**接收：**
+
+| device | command | size | roll | pitch | yaw |
+| ------ | ------- | ---- | -----------| -----------| -----------|
+| 0x03   | 108    | 0x06 | 16 bit signed | 16 bit signed | 16 bit signed |
+
+roll: 横滚值
+
+pitch: 俯仰值
+
+yaw: 偏航值
+
+#### MSP_ANALOG 110
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 110    | 0x00 |
+
+**接收：**
+
+| device | command | size | adc left | adc right | adc fan |
+| ------ | ------- | ---- | -----------| -----------| -----------|
+| 0x03   | 110    | 0x06 | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned |
+
+adc left: 左边轮电流原始ADC值
+
+adc right: 右边轮电流原始ADC值
+
+adc fan: 风机电流原始ADC值
+
+#### MSP_ADAPTER 111
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 111    | 0x00 |
+
+**接收：**
+
+| device | command | size | adapter voltage | battery voltage |
+| ------ | ------- | ---- | -----------| -----------|
+| 0x03   | 111    | 0x08 | 8 bit unsigned | 16 bit unsigned |
+
+adapter voltage：适配器电压
+
+battery voltage：电池电压 x 10
+
+#### MSP_BARO_DIFF 113
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 113     | 0x00 |
+
+**接收：**
+
+| device | command | size | baro diff | baro origin | baro standard |
+| ------ | ------- | ---- | -----------| -----------| -----------|
+| 0x03   | 113     | 0x0A | 16 bit signed | 32 bit unsigned | 32 bit unsigned |
+
+baro diff: 机器运行过程中气压差值
+
+baro origin：气压实时值
+
+baro standard：机器启动时采集到的标准大气压值
+
+#### MSP_WATER_BOX 114
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 114    | 0x00 |
+
+**接收：**
+
+| device | command | size | water status real | water adc | water status filter |
+| ------ | ------- | ---- | -----------| -----------| -----------|
+| 0x03   | 114    | 0x08 | 8 bit unsigned | 16 bit unsigned | 16 bit unsigned |
+
+water status real：水量状态实时值
+
+water adc：水量ADC值
+
+water status filter：水量状态滤波值
 
 #### MSP_GET_PWMVALUE 130
 
