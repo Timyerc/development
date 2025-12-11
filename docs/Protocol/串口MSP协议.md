@@ -292,23 +292,26 @@ Simple response
 | 108 | MSP_ATTITUDE | 机器姿态角 |
 | 110 | MSP_ANALOG | AD数据 |
 | 111 | MSP_ADAPTER | 适配器电压 |
+| 112 | MSP_FOURCORNER | 悬空开关 | | ✓ |
 | 113 | MSP_BARO_DIFF | 无边气压检测 |
 | 114 | MSP_WATER_BOX | 水量检测 |
-| 115 | MSP_WIFI_RSSI | WIFI产测结果 |
-| 116 | MSP_WIFI_TEST | WIFI开始产测 |
-| 117 | MSP_FAST_CURRENT | 直行电流判断 |
-| 118 | MSP_Z_TURN_FAST_CURRENT | Z字水平换行电流 |
+| 115 | MSP_WIFI_RSSI | 获取WIFI产测结果 |
+| 117 | MSP_FAST_CURRENT | 直行电流判断 | | ✓ |
+| 118 | MSP_Z_TURN_FAST_CURRENT | Z字水平换行电流 | | ✓ |
 | 120 | MSP_SYSTICK | 系统周期 |
-| 121 | MSP_OVO_WATER_DET | 水量检测 |
-| 122 | MSP_LEAK_DET | 无边检测 |
+| 121 | MSP_ORIGIN_ARGS | 回原点数据 | ✓ |
+| 123 | MSP_MOTOR_CURRENT | 边轮马达实际电流值 * 100 |
+| 130到136指令只有在使用USE_UART_CONFIG功能有效 |
 | 130 | MSP_GET_PWMVALUE | 获取风机占比 |
-| 131 | MSP_GET_USE_FAN_LEVEL_DYNAMIC_COMP | 获取风机最大最小占比 |
+| 131 | MSP_GET_USE_FAN_LEVEL_DYNAMIC_COMP | 获取风机最大最小占空比 |
 | 132 | MSP_GET_USE_FAN_OUTPUT_PID | 获取风机恒压占比 |
-| 133 | MSP_GET_MOTOR_VALUE | 获取马达占比 |
-| 134 | MSP_GET_BOUNDLESS | 获取无边电流 |
-| 135 | MSP_GET_SPRAY_VALUE | 获取喷水功能 |
+| 133 | MSP_GET_MOTOR_VALUE | 获取马达最小占空比 |
+| 134 | MSP_GET_BOUNDLESS | 获取无边判断阈值 |
+| 135 | MSP_GET_SPRAY_VALUE | 获取喷水功能参数 |
 | 136 | MSP_GET_GYRO_THRESHOLD | 获取陀螺仪阈值 |
+
 | 设置 |
+| 116 | MSP_WIFI_TEST | WIFI开始产测 |
 | 205 | MSP_ACC_CALIBRATION | 加速度校准 |
 | 208 | MSP_PLAY_VOICE | 测试语音 |
 | 209 | MSP_SET_SPRAY | 控制喷水 |
@@ -324,6 +327,8 @@ Simple response
 | 226 | MSP_SET_GYRO_THRESHOLD | 设置陀螺仪阈值 |
 
 ### 擦窗机命令细节
+
+**读取**
 
 #### MSP_RAW_IMU 102
 
@@ -355,7 +360,7 @@ Simple response
 
 | device | command | size | data0 | data1 | data2 |
 | ------ | ------- | ---- | -----------| -----------| -----------|
-| 0x03   | 103    | 0x04 | 16 bit signed | 16 bit signed | 16 bit signed |
+| 0x03   | 103    | 0x06 | 16 bit signed | 16 bit signed | 16 bit signed |
 
 #### MSP_GYRO_DETECT 104
 
@@ -493,11 +498,27 @@ adc fan: 风机电流原始ADC值
 
 | device | command | size | adapter voltage | battery voltage |
 | ------ | ------- | ---- | -----------| -----------|
-| 0x03   | 111    | 0x08 | 16 bit unsigned | 16 bit unsigned |
+| 0x03   | 111    | 0x04 | 16 bit unsigned | 16 bit unsigned |
 
 adapter voltage：适配器电压 x 10
 
 battery voltage：电池电压 x 10
+
+#### MSP_FOURCORNER  112
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 112     | 0x00 |
+
+**接收：**
+
+| device | command | size | state |
+| ------ | ------- | ---- | -----------|
+| 0x03   | 112    | 0x04 | 8 bit unsigned |
+
+state：4脚浮空开关状态，位0左上角，位1右上角，位2左下角，位3右下角
 
 #### MSP_BARO_DIFF 113
 
@@ -531,13 +552,121 @@ baro standard：机器启动时采集到的标准大气压值
 
 | device | command | size | water status real | water adc | water status filter |
 | ------ | ------- | ---- | -----------| -----------| -----------|
-| 0x03   | 114    | 0x08 | 8 bit unsigned | 16 bit unsigned | 16 bit unsigned |
+| 0x03   | 114    | 0x05 | 8 bit unsigned | 16 bit unsigned | 16 bit unsigned |
 
 water status real：水量状态实时值
 
 water adc：水量ADC值
 
 water status filter：水量状态滤波值
+
+#### MSP_WIFI_RSSI 115
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 115    | 0x00 |
+
+**接收：**
+
+| device | command | size | rssi |
+| ------ | ------- | ---- | -----------|
+| 0x03   | 115    | 0x01 | 8 bit unsigned |
+
+rssi：wifi信号强度，0 ~ 100
+
+#### MSP_FAST_CURRENT 117
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 117    | 0x00 |
+
+**接收：**
+
+| device | command | size | detect cnt | diff |
+| ------ | ------- | ---- | -----------|
+| 0x03   | 117    | 0x03 | 8 bit unsigned | 16 bit signed |
+
+detect cnt：检测有效次数
+
+diff：边轮电流ADC差值
+
+#### MSP_Z_TURN_FAST_CURRENT 118
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 118    | 0x00 |
+
+**接收：**
+
+| device | command | size | single diff |
+| ------ | ------- | ---- | ----------- |
+| 0x03   | 118     | 0x02 | 16 bit signed |
+
+single diff：单边电流与均值差值
+
+#### MSP_SYSTICK 120
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 120    | 0x00 |
+
+**接收：**
+
+| device | command | size | sample time  |
+| ------ | ------- | ---- | ----------- |
+| 0x03   | 120     | 0x02 | 16 bit signed |
+
+sample time: 程序运行主循环的周期，单位0.1ms。
+
+#### MSP_ORIGIN_ARGS 121
+
+> 有回原点功能有效
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 121     | 0x00 |
+
+**接收：**
+
+| device | command | size | y2top steps | x2right steps | x total steps | x run steps |
+| ------ | ------- | ---- | ----------- | ----------- | ----------- | ----------- |
+| 0x03   | 121     | 0x08 | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned |
+
+y2top steps：垂直到顶部的步数
+
+x2right steps：水平到右边的步数
+
+x total steps：水平总步数
+
+x run steps：水平已走步数
+
+#### MSP_MOTOR_CURRENT 123
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 123     | 0x00 |
+
+**接收：**
+
+| device | command | size | current left | current right |
+| ------ | ------- | ---- | ----------- | ----------- |
+| 0x03   | 123     | 0x04 | 16 bit unsigned | 16 bit unsigned |
+
+current left：左轮电流值
+
+current right：右轮电流值
 
 #### MSP_GET_PWMVALUE 130
 
@@ -553,6 +682,8 @@ water status filter：水量状态滤波值
 | ------ | ------- | ---- | -----------|
 | 0x03   | 130    | 0x01 | 8 bit unsigned |
 
+pwmValue：风机PWM占空比输出
+
 #### MSP_GET_USE_FAN_LEVEL_DYNAMIC_COMP 131
 
 **Require：**
@@ -567,6 +698,10 @@ water status filter：水量状态滤波值
 | ------ | ------- | ---- | -----------|-----------|
 | 0x03   | 131    | 0x02 | 8 bit unsigned |8 bit unsigned |
 
+pwmvalueMax：动态吸力最大风机PWM占空比
+
+pwmvalueMin：动态吸力最小风机PWM占空比
+
 #### MSP_GET_USE_FAN_OUTPUT_PID 132
 
 **Require：**
@@ -577,9 +712,21 @@ water status filter：水量状态滤波值
 
 **Response：**
 
-| device | command | size | fanPwmvalueAtIdle | fanPwmvalueMin|fanPwmvalueMax|defaultTargetFanPwmvalue|maxTargetFanPwmvalue|minTargetFanPwmvalue|
+| device | command | size | fanPwmvalueAtIdle | fanPwmvalueMin | fanPwmvalueMax |defaultPressure | maxPressure | minPressure |
 | ------ | ------- | ---- | -----------|-----------|------- | ---- | -----------|-----------|
-| 0x03   | 132    | 0x09 | 8 bit unsigned |8 bit unsigned |8 bit unsigned |16 bit unsigned |16 bit unsigned |16 bit unsigned |
+| 0x03   | 132    | 0x09 | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned |
+
+fanPwmvalueAtIdle：待机状态风机PWM占空比
+
+fanPwmvalueMin：最小风机PWM占空比
+
+fanPwmvalueMax：最大风机PWM占空比
+
+defaultPressure：默认目标吸力
+
+maxPressure：最大吸力
+
+minPressure：最小吸力
 
 #### MSP_GET_MOTOR_VALUE 133
 
@@ -595,6 +742,10 @@ water status filter：水量状态滤波值
 | ------ | ------- | ---- | -----------|-----------|
 | 0x03   | 133    | 0x02 | 8 bit unsigned |8 bit unsigned |
 
+minPwmValue：水平运动边轮最小PWM占空比
+
+upMinPwmValue：向上运动边轮最小PWM占空比
+
 #### MSP_GET_BOUNDLESS 134
 
 **Require：**
@@ -605,9 +756,15 @@ water status filter：水量状态滤波值
 
 **Response：**
 
-| device | command | size | fanThrdAddE | fanUpThrdAdd|hangCnt|
+| device | command | size | fanThres | fanUpThres | hangCnt |
 | ------ | ------- | ---- | -----------|-----------| -----------|
-| 0x03   | 134    | 0x03 | 8 bit unsigned |8 bit unsigned |8 bit unsigned |
+| 0x03   | 134    | 0x03 | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned |
+
+fanThres：水平运动无边检测阈值
+
+fanUpThres：竖直运动无边检测阈值
+
+hangCnt：无边检测次数
 
 #### MSP_GET_SPRAY_VALUE 135
 
@@ -619,9 +776,17 @@ water status filter：水量状态滤波值
 
 **Response：**
 
-| device | command | size | waterPump | waterPumpDuration|waterPumpStartAngle|waterPumpMoveCnt|
+| device | command | size | waterPump | duration | startAngle | moveCnt |
 | ------ | ------- | ---- | -----------|-----------| -----------|-----------|
-| 0x03   | 135    | 0x05 | 8 bit unsigned |16 bit unsigned |8 bit unsigned |8 bit unsigned |
+| 0x03   | 135    | 0x05 | 8 bit unsigned | 16 bit unsigned | 8 bit unsigned | 8 bit unsigned |
+
+waterPump：喷水功能开关状态，0无喷水功能，1有喷水功能
+
+duration：喷水单次持续时间
+
+startAngle：喷水开启角度
+
+moveCnt：开启喷水步数间隔
 
 #### MSP_GET_GYRO_THRESHOLD 136
 
@@ -633,9 +798,32 @@ water status filter：水量状态滤波值
 
 **Response：**
 
-| device | command | size | gyroDiffThreshold | gyroThreshold|gyroUpDiffThreshold|gyroUpThreshold|
+| device | command | size | gyroDiff | gyroThreshold
+| gyroUpDiff | gyroUpThreshold |
 | ------ | ------- | ---- | -----------|-----------| -----------|-----------|
-| 0x03   | 136    | 0x04 | 8 bit unsigned |8 bit unsigned |8 bit unsigned |8 bit unsigned |
+| 0x03   | 136    | 0x04 | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned |
+
+gyroDiff：水平运动判断撞边陀螺仪变化值
+
+gyroThreshold：水平运动判断撞边陀螺仪绝对值
+
+gyroUpDiff：竖直运动判断撞边陀螺仪变化值
+
+gyroUpThreshold：竖直运动判断撞边陀螺仪绝对值
+
+**设置**
+
+#### MSP_WIFI_TEST 116
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 116    | 0x00 |
+
+**接收：**
+
+Simple response
 
 #### MSP_SET_PWMVALUE 220
 
