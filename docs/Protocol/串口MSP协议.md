@@ -826,13 +826,13 @@ Simple response
 
 #### MSP_SET_PWMVALUE 220
 
-**Require：**
+**发送**
 
 | device | command | size | pwmValue |
 | ------ | ------- | ---- | -----------|
 | 0x03   | 220    | 0x01 | 8 bit unsigned |
 
-**Response：**
+**接收**
 
 Simple response
 
