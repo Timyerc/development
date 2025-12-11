@@ -353,9 +353,9 @@ Simple response
 
 **接收：**
 
-| device | command | size | data0 | data1 |
-| ------ | ------- | ---- | -----------| -----------|
-| 0x03   | 103    | 0x04 | 16 bit unsigned | 16 bit unsigned |
+| device | command | size | data0 | data1 | data2 |
+| ------ | ------- | ---- | -----------| -----------| -----------|
+| 0x03   | 103    | 0x04 | 16 bit signed | 16 bit signed | 16 bit signed |
 
 #### MSP_GYRO_DETECT 104
 
@@ -387,7 +387,7 @@ sample time: 程序运行主循环的周期，单位0.1ms。
 
 | device | command | size | gyro diff 1 | gyro diff 2 | gyro z |
 | ------ | ------- | ---- | -----------| -----------| -----------|
-| 0x03   | 105    | 0x06 | 16 bit signed | 16 bit signed | 16 bit unsigned |
+| 0x03   | 105    | 0x06 | 16 bit signed | 16 bit signed | 16 bit signed |
 
 gyro diff 1: 陀螺仪变化值1
 
@@ -451,15 +451,15 @@ pressure: 使用闭环吸力时，此值为目标负压值；否则为风机pwm�
 
 **接收：**
 
-| device | command | size | roll | pitch | yaw |
+| device | command | size | euler x | euler y | euler z |
 | ------ | ------- | ---- | -----------| -----------| -----------|
 | 0x03   | 108    | 0x06 | 16 bit signed | 16 bit signed | 16 bit signed |
 
-roll: 横滚值
+euler x: x轴欧拉角度
 
-pitch: 俯仰值
+euler y: y轴欧拉角度
 
-yaw: 偏航值
+euler z: z轴欧拉角度
 
 #### MSP_ANALOG 110
 
@@ -493,9 +493,9 @@ adc fan: 风机电流原始ADC值
 
 | device | command | size | adapter voltage | battery voltage |
 | ------ | ------- | ---- | -----------| -----------|
-| 0x03   | 111    | 0x08 | 8 bit unsigned | 16 bit unsigned |
+| 0x03   | 111    | 0x08 | 16 bit unsigned | 16 bit unsigned |
 
-adapter voltage：适配器电压
+adapter voltage：适配器电压 x 10
 
 battery voltage：电池电压 x 10
 
