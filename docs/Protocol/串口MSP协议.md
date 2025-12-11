@@ -309,7 +309,6 @@ Simple response
 | 134 | MSP_GET_BOUNDLESS | 获取无边判断阈值 |
 | 135 | MSP_GET_SPRAY_VALUE | 获取喷水功能参数 |
 | 136 | MSP_GET_GYRO_THRESHOLD | 获取陀螺仪阈值 |
-
 | 设置 |
 | 116 | MSP_WIFI_TEST | WIFI开始产测 |
 | 205 | MSP_ACC_CALIBRATION | 加速度校准 |
