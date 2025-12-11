@@ -320,7 +320,7 @@ Simple response
 | 220 | MSP_SET_PWMVALUE | 设置风机占比 |
 | 221 | MSP_SET_USE_FAN_LEVEL_DYNAMIC_COMP | 设置风机最大最小占比 |
 | 222 | MSP_SET_USE_FAN_OUTPUT_PID | 设置风机恒压占比 |
-| 223 | MSP_SET_MOTOR_VALUE | 设置马达占比 |
+| 223 | MSP_SET_MOTOR_VALUE | 设置马达最小占比 |
 | 224 | MSP_SET_BOUNDLESS | 设置无边电流 |
 | 225 | MSP_SET_SPRAY_VALUE | 设置喷水功能 |
 | 226 | MSP_SET_GYRO_THRESHOLD | 设置陀螺仪阈值 |
@@ -831,6 +831,8 @@ Simple response
 | device | command | size | pwmValue |
 | ------ | ------- | ---- | -----------|
 | 0x03   | 220    | 0x01 | 8 bit unsigned |
+
+pwmValue：风机占空比，0~100
 
 **接收**
 
