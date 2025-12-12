@@ -1033,7 +1033,7 @@ Simple response
 
 | device | command | size | recv 0 | recv 1 |
 | ------ | ------- | ---- | -------- | ------------- |
-| 0x03   | 136     | 0x04 | 16 bit signed | 16 bit signed |
+| 0x03   | 215     | 0x04 | 16 bit signed | 16 bit signed |
 
 #### MSP_SET_TRIGGER_2 216
 
@@ -1041,13 +1041,13 @@ Simple response
 
 | device | command | size | send 0 | send 1 | send 2 | send 3 |
 | ------ | ------- | ---- | ------ | ------ | ------ | ------ |
-| 0x03   | 215     | 0x04 | 16 bit signed | 16 bit signed | 16 bit signed | 16 bit signed |
+| 0x03   | 216     | 0x04 | 16 bit signed | 16 bit signed | 16 bit signed | 16 bit signed |
 
 **接收**
 
 | device | command | size | recv 0 | recv 1 | recv 2 | recv 3 |
 | ------ | ------- | ---- | -------- | -------- | -------- | -------- |
-| 0x03   | 136     | 0x04 | 16 bit signed | 16 bit signed | 16 bit signed | 16 bit signed |
+| 0x03   | 216     | 0x04 | 16 bit signed | 16 bit signed | 16 bit signed | 16 bit signed |
 
 #### MSP_SET_PWMVALUE 220
 
