@@ -872,7 +872,7 @@ real pressure：实时吸力
 **接收：**
 
 | device | command | size | charge state | battery voltage | charge current | battery cell |
-| ------ | ------- | ---- | -------- | ------------- |
+| ------ | ------- | ---- | -------- | -------- | -------- | -------- |
 | 0x03   | 146     | 0x05 | 8 bit unsigned | 8 bit unsigned | 16 bit unsigned | 8 bit unsigned |
 
 charge state：充电状态，0未知，1慢充，2快充，3恒压，
