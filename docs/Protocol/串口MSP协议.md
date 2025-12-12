@@ -309,8 +309,15 @@ Simple response
 | 134 | MSP_GET_BOUNDLESS | 获取无边判断阈值 |
 | 135 | MSP_GET_SPRAY_VALUE | 获取喷水功能参数 |
 | 136 | MSP_GET_GYRO_THRESHOLD | 获取陀螺仪阈值 |
+| 140 | MSP_GET_FAN_PID_PARAM | 获取风机PID参数 |
+| 142 | MSP_GET_FAN_PID_RESULT | 获取风机目标负压和实时负压 |
+| 146 | MSP_GET_BATTERY_CHARGE_PARAM | 获取分立充电参数 |
+| 148 | MSP_GET_AUTO_TEST_RESULT | 获取自动化测试结果 |
+| 151 | MSP_GET_REMOTE | 获取遥控器指令 |
 | 设置 |
 | 116 | MSP_WIFI_TEST | WIFI开始产测 |
+| 141 | MSP_SET_FAN_PID_PARAM | 设置风机PID参数 |
+| 147 | MSP_SET_AUTO_TEST_RESULT | 设置自动化测试结果 |
 | 205 | MSP_ACC_CALIBRATION | 加速度校准 |
 | 208 | MSP_PLAY_VOICE | 测试语音 |
 | 209 | MSP_SET_SPRAY | 控制喷水 |
@@ -810,7 +817,125 @@ gyroUpDiff：竖直运动判断撞边陀螺仪变化值
 
 gyroUpThreshold：竖直运动判断撞边陀螺仪绝对值
 
+#### MSP_GET_FAN_PID_PARAM 140
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 140    | 0x00 |
+
+**接收：**
+
+| device | command | size | kp | ki | kd |
+| ------ | ------- | ---- | -------- | ------------- | ---------- |
+| 0x03   | 140     | 0x0C | 32 bit unsigned | 32 bit unsigned | 32 bit unsigned |
+
+kp：比例参数 * 1000，范围 0.01 ~ 1.0
+
+ki：积分参数 * 1000，0.001 ~ 0.01
+
+kd：微分参数 * 1000，0.0001 ~ 0.001
+
+#### MSP_GET_FAN_PID_RESULT 142
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 142    | 0x00 |
+
+**接收：**
+
+| device | command | size | target pressure | real pressure |
+| ------ | ------- | ---- | -------- | ------------- |
+| 0x03   | 142     | 0x08 | 32 bit unsigned | 32 bit unsigned |
+
+target pressure：目标吸力
+
+real pressure：实时吸力
+
+#### MSP_GET_BATTERY_CHARGE_PARAM 146
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 146    | 0x00 |
+
+**接收：**
+
+| device | command | size | charge state | battery voltage | charge current | battery cell |
+| ------ | ------- | ---- | -------- | ------------- |
+| 0x03   | 146     | 0x05 | 8 bit unsigned | 8 bit unsigned | 16 bit unsigned | 8 bit unsigned |
+
+charge state：充电状态，0未知，1慢充，2快充，3恒压，
+
+battery voltage：电池电压 * 10
+
+charge current：充电电流 * 1000
+
+bettery cell：电池节数
+
+#### MSP_GET_AUTO_TEST_RESULT 148
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 148    | 0x00 |
+
+**接收：**
+
+| device | command | size | completed |
+| ------ | ------- | ---- | -------- |
+| 0x03   | 148     | 0x01 | 8 bit unsigned |
+
+completed：1为完成，0为未完成
+
+#### MSP_GET_REMOTE 151
+
+**发送：**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 151    | 0x00 |
+
+**接收：**
+
+| device | command | size | remote code |
+| ------ | ------- | ---- | -------- |
+| 0x03   | 151     | 0x08 | 8 bit unsigned |
+
+remote code：遥控器码
+
 **设置**
+
+#### MSP_SET_FAN_PID_PARAM 141
+
+**发送：**
+
+| device | command | size | kp | ki | kd |
+| ------ | ------- | ---- | ---- | ---- | ---- |
+| 0x03   | 141    | 0x0C | 32 bit unsigned | 32 bit unsigned | 32 bit unsigned |
+
+**接收：**
+
+Simple response
+
+#### MSP_SET_AUTO_TEST_RESULT 147
+
+**发送：**
+
+| device | command | size | completed |
+| ------ | ------- | ---- | ---- |
+| 0x03   | 147    | 0x0C | 8 bit unsigned |
+
+completed：完成写1，否则写0
+
+**接收：**
+
+Simple response
 
 #### MSP_WIFI_TEST 116
 
