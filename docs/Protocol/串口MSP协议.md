@@ -84,13 +84,13 @@
 
 #### CMD_RANGEFINDER 97
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 97    | 0x00 |
 
-**Response：**
+**接收：**
 
 | command | size | left front | right front | left back | right back | sample rate |
 | ------- | ---- | -----------| ----------- | ----------| ---------- | ----------  |
@@ -98,43 +98,43 @@
 
 #### CMD_SET_HEARTBEAT 98
 
-**Require：**
+**发送：**
 
 | device | command | size | rotate value | 
 | ------ | ------- | ---- | ----------------|
 | 0x03   | 98    | 0x02 | 16 bit signed   |
 
-**Response：**
+**接收：**
 
 Simple response
 
 #### CMD_SET_ROTATE 99
 
-**Require：**
+**发送：**
 
 | device | command | size | rotate value | 
 | ------ | ------- | ---- | ----------------|
 | 0x03   | 99    | 0x02 | 16 bit signed   |
 
-**Response：**
+**接收：**
 
 Simple response
 
 #### CMD_SET_SPEED 100
 
-**Require：**
+**发送：**
 
 | device | command | size | speed value | 
 | ------ | ------- | ---- | ----------------|
 | 0x03   | 100    | 0x02 | 16 bit signed   |
 
-**Response：**
+**接收：**
 
 Simple response
 
 #### CMD_SET_LINE_STATUS 101
 
-**Require：**
+**发送：**
 
 | device | command | size | busbar distance | busbar angle  | gap distance  | gap angle     | state          |
 | ------ | ------- | ---- | ----------------| ------------- | ------------  | ------------- | -------------- |
@@ -147,19 +147,19 @@ Simple response
 | 水平有数据 | 0x02  |
 | 异常       | 0x03  |
 
-**Response：**
+**接收：**
 
 Simple response
 
 #### CMD_MOTOR_SPEED 104
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 104    | 0x00 |
 
-**Response：**
+**接收：**
 
 | command | size | left raw speed | right raw speed | average speed | move distance |
 | ------- | ---- | ---------------| --------------- | --------------| ------------- |
@@ -167,13 +167,13 @@ Simple response
 
 #### CMD_ATTITUDE 108
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 108    | 0x00 |
 
-**Response：**
+**接收：**
 
 | command | size | yaw | pitch | roll | merge yaw |
 | ------- | ---- | ---------------| --------------- | --------------| ------------- |
@@ -181,13 +181,13 @@ Simple response
 
 #### CMD_GET_REVEIVER 110
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 110    | 0x00 |
 
-**Response：**
+**接收：**
 
 | command | size | thr | yaw | arm | mode | sucker | brush | failsafe |
 | ------- | ---- | --- | --- | ----| ---- | -------| ----- | -------- |
@@ -195,25 +195,25 @@ Simple response
 
 #### CMD_FRAMERATE 111
 
-**Require：**
+**发送：**
 
 | device | command | size | rotate value | 
 | ------ | ------- | ---- | ----------------|
 | 0x03   | 111    | 0x02 | 16 bit signed   |
 
-**Response：**
+**接收：**
 
 Simple response
 
 #### CMD_BATTERY_STATE 130
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 130    | 0x00 |
 
-**Response：**
+**接收：**
 
 | command | size | battery voltage | battery state |
 | ------- | ---- | ----------------| -------------- |
@@ -230,13 +230,13 @@ Simple response
 
 #### CMD_GET_TEMP 132
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 132    | 0x00 |
 
-**Response：**
+**接收：**
 
 | command | size | temperature |
 | ------- | ---- | ------------|
@@ -246,13 +246,13 @@ Simple response
 
 #### CMD_GET_MOVE_STATUS 133
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 133    | 0x00 |
 
-**Response：**
+**接收：**
 
 | command | size | move mode | path state |
 | ------- | ---- | ------------| -------- |
@@ -260,7 +260,7 @@ Simple response
 
 #### CMD_SET_CELL_INFO 134
 
-**Require：**
+**发送：**
 
 | device | command | size | cell width | cell type | run dir  |
 | ------ | ------- | ---- | -----------| --------- | -------- |
@@ -272,7 +272,7 @@ cell type: 0 半片；1 全片
 
 run dir: 0 沿着长边运动；1 沿着短边运动
 
-**Response：**
+**接收：**
 
 Simple response
 
@@ -586,7 +586,7 @@ rssi：wifi信号强度，0 ~ 100
 **接收：**
 
 | device | command | size | detect cnt | diff |
-| ------ | ------- | ---- | -----------|
+| ------ | ------- | ---- | -----------| -----------|
 | 0x03   | 117    | 0x03 | 8 bit unsigned | 16 bit signed |
 
 detect cnt：检测有效次数
@@ -669,13 +669,13 @@ current right：右轮电流值
 
 #### MSP_GET_PWMVALUE 130
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 130    | 0x00 |
 
-**Response：**
+**接收：**
 
 | device | command | size | pwmValue |
 | ------ | ------- | ---- | -----------|
@@ -685,13 +685,13 @@ pwmValue：风机PWM占空比输出
 
 #### MSP_GET_USE_FAN_LEVEL_DYNAMIC_COMP 131
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 131    | 0x00 |
 
-**Response：**
+**接收：**
 
 | device | command | size | pwmvalueMax | pwmvalueMin|
 | ------ | ------- | ---- | -----------|-----------|
@@ -703,13 +703,13 @@ pwmvalueMin：动态吸力最小风机PWM占空比
 
 #### MSP_GET_USE_FAN_OUTPUT_PID 132
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 132    | 0x00 |
 
-**Response：**
+**接收：**
 
 | device | command | size | fanPwmvalueAtIdle | fanPwmvalueMin | fanPwmvalueMax |defaultPressure | maxPressure | minPressure |
 | ------ | ------- | ---- | -----------|-----------|------- | ---- | -----------|-----------|
@@ -729,13 +729,13 @@ minPressure：最小吸力
 
 #### MSP_GET_MOTOR_VALUE 133
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 133    | 0x00 |
 
-**Response：**
+**接收：**
 
 | device | command | size | minPwmValue | upMinPwmValue|
 | ------ | ------- | ---- | -----------|-----------|
@@ -747,13 +747,13 @@ upMinPwmValue：向上运动边轮最小PWM占空比
 
 #### MSP_GET_BOUNDLESS 134
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 134    | 0x00 |
 
-**Response：**
+**接收：**
 
 | device | command | size | fanThres | fanUpThres | hangCnt |
 | ------ | ------- | ---- | -----------|-----------| -----------|
@@ -767,13 +767,13 @@ hangCnt：无边检测次数
 
 #### MSP_GET_SPRAY_VALUE 135
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 135    | 0x00 |
 
-**Response：**
+**接收：**
 
 | device | command | size | waterPump | duration | startAngle | moveCnt |
 | ------ | ------- | ---- | -----------|-----------| -----------|-----------|
@@ -789,18 +789,17 @@ moveCnt：开启喷水步数间隔
 
 #### MSP_GET_GYRO_THRESHOLD 136
 
-**Require：**
+**发送：**
 
 | device | command | size |
 | ------ | ------- | ---- |
 | 0x03   | 136    | 0x00 |
 
-**Response：**
+**接收：**
 
-| device | command | size | gyroDiff | gyroThreshold
-| gyroUpDiff | gyroUpThreshold |
-| ------ | ------- | ---- | -----------|-----------| -----------|-----------|
-| 0x03   | 136    | 0x04 | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned |
+| device | command | size | gyroDiff | gyroThreshold | gyroUpDiff | gyroUpThreshold |
+| ------ | ------- | ---- | -------- | ------------- | ---------- | --------------- |
+| 0x03   | 136     | 0x04 | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned |
 
 gyroDiff：水平运动判断撞边陀螺仪变化值
 
@@ -824,6 +823,100 @@ gyroUpThreshold：竖直运动判断撞边陀螺仪绝对值
 
 Simple response
 
+#### MSP_ACC_CALIBRATION 205
+
+**发送**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 205     | 0x00 |
+
+**接收**
+
+Simple response
+
+#### MSP_PLAY_VOICE 208
+
+**发送**
+
+| device | command | size | voice index |
+| ------ | ------- | ---- | -----------|
+| 0x03   | 208     | 0x01 | 8 bit unsigned |
+
+voice index：语音索引
+
+**接收**
+
+Simple response
+
+#### MSP_SET_SPRAY 209
+
+**发送**
+
+| device | command | size |
+| ------ | ------- | ---- |
+| 0x03   | 209     | 0x00 |
+
+**接收**
+
+Simple response
+
+#### MSP_SET_FAN 211
+
+**发送**
+
+| device | command | size | pwm value |
+| ------ | ------- | ---- | -----------|
+| 0x03   | 211    | 0x01 | 8 bit unsigned |
+
+pwm value：风机占空比，0~100
+
+**接收**
+
+Simple response
+
+#### MSP_SET_MOTOR 214
+
+**发送**
+
+| device | command | size | dir |
+| ------ | ------- | ---- | -----------|
+| 0x03   | 214    | 0x01 | 8 bit unsigned |
+
+dir：设置边轮马达运动方向，0停转，1正转，2反转
+
+**接收**
+
+Simple response
+
+#### MSP_SET_TRIGGER 215
+
+**发送**
+
+| device | command | size | send 0 | send 1 |
+| ------ | ------- | ---- | ------ | ------ |
+| 0x03   | 215     | 0x04 | 16 bit signed | 16 bit signed |
+
+**接收**
+
+| device | command | size | recv 0 | recv 1 |
+| ------ | ------- | ---- | -------- | ------------- |
+| 0x03   | 136     | 0x04 | 16 bit signed | 16 bit signed |
+
+#### MSP_SET_TRIGGER_2 216
+
+**发送**
+
+| device | command | size | send 0 | send 1 | send 2 | send 3 |
+| ------ | ------- | ---- | ------ | ------ | ------ | ------ |
+| 0x03   | 215     | 0x04 | 16 bit signed | 16 bit signed | 16 bit signed | 16 bit signed |
+
+**接收**
+
+| device | command | size | recv 0 | recv 1 | recv 2 | recv 3 |
+| ------ | ------- | ---- | -------- | -------- | -------- | -------- |
+| 0x03   | 136     | 0x04 | 16 bit signed | 16 bit signed | 16 bit signed | 16 bit signed |
+
 #### MSP_SET_PWMVALUE 220
 
 **发送**
@@ -840,73 +933,73 @@ Simple response
 
 #### MSP_SET_USE_FAN_LEVEL_DYNAMIC_COMP 221
 
-**Require：**
+**发送：**
 
 | device | command | size | pwmvalueMax | pwmvalueMin|
 | ------ | ------- | ---- | -----------|-----------|
 | 0x03   | 221    | 0x02 | 8 bit unsigned |8 bit unsigned |
 
-**Response：**
+**接收：**
 
 Simple response
 
 #### MSP_SET_USE_FAN_OUTPUT_PID 222
 
-**Require：**
+**发送：**
 
-| device | command | size | fanPwmvalueAtIdle | fanPwmvalueMin|fanPwmvalueMax|defaultTargetFanPwmvalue|maxTargetFanPwmvalue|minTargetFanPwmvalue|
+| device | command | size | fanPwmvalueAtIdle | fanPwmvalueMin | fanPwmvalueMax | defaultTargetFanPwmvalue | maxTargetFanPwmvalue | minTargetFanPwmvalue |
 | ------ | ------- | ---- | -----------|-----------|------- | ---- | -----------|-----------|
-| 0x03   | 222    | 0x09 | 8 bit unsigned |8 bit unsigned |8 bit unsigned |16 bit unsigned |16 bit unsigned |16 bit unsigned |
+| 0x03   | 222    | 0x09 | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned | 16 bit unsigned | 16 bit unsigned | 16 bit unsigned |
 
-**Response：**
+**接收：**
 
 Simple response
 
 #### MSP_SET_MOTOR_VALUE 223
 
-**Require：**
+**发送：**
 
-| device | command | size | minPwmValue | upMinPwmValue|
-| ------ | ------- | ---- | -----------|-----------|
+| device | command | size | minPwmValue | upMinPwmValue |
+| ------ | ------- | ---- | -----------|----------- |
 | 0x03   | 223    | 0x02 | 8 bit unsigned |8 bit unsigned |
 
-**Response：**
+**接收：**
 
 Simple response
 
 #### MSP_SET_BOUNDLESS 224
 
-**Require：**
+**发送：**
 
-| device | command | size | fanThrdAddE | fanUpThrdAdd|hangCnt|
+| device | command | size | fanThrd | fanUpThrd | hangCnt |
 | ------ | ------- | ---- | -----------|-----------| -----------|
-| 0x03   | 134    | 0x03 | 8 bit unsigned |8 bit unsigned |8 bit unsigned |
+| 0x03   | 134    | 0x03 | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned |
 
-**Response：**
+**接收：**
 
 Simple response
 
 #### MSP_SET_SPRAY_VALUE 225
 
-**Require：**
+**发送：**
 
-| device | command | size | waterPump | waterPumpDuration|waterPumpStartAngle|waterPumpMoveCnt|
-| ------ | ------- | ---- | -----------|-----------| -----------|-----------|
-| 0x03   | 225    | 0x05 | 8 bit unsigned |16 bit unsigned |8 bit unsigned |8 bit unsigned |
+| device | command | size | waterPump | duration | startAngle | moveCnt |
+| ------ | ------- | ---- | --------- | -------- | ---------- | ------- |
+| 0x03   | 225    | 0x05 | 8 bit unsigned | 16 bit unsigned | 8 bit unsigned | 8 bit unsigned |
 
-**Response：**
+**接收：**
 
 Simple response
 
 #### MSP_SET_GYRO_THRESHOLD 226
 
-**Require：**
+**发送：**
 
-| device | command | size | gyroDiffThreshold | gyroThreshold|gyroUpDiffThreshold|gyroUpThreshold|
-| ------ | ------- | ---- | -----------|-----------| -----------|-----------|
-| 0x03   | 136    | 0x04 | 8 bit unsigned |8 bit unsigned |8 bit unsigned |8 bit unsigned |
+| device | command | size | gyroDiffThreshold | gyroThreshold | gyroUpDiffThreshold | gyroUpThreshold |
+| ------ | ------- | ---- | ----------- | ----------- | ----------- | ----------- |
+| 0x03   | 136    | 0x04 | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned |
 
-**Response：**
+**接收：**
 
 Simple response
 
