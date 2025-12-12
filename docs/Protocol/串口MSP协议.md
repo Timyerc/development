@@ -819,6 +819,8 @@ gyroUpThreshold：竖直运动判断撞边陀螺仪绝对值
 
 #### MSP_GET_FAN_PID_PARAM 140
 
+> 需要同时打开`USE_UART_CONFIG`和`USE_UART_CONFIG_PID`功能
+
 **发送：**
 
 | device | command | size |
@@ -831,13 +833,15 @@ gyroUpThreshold：竖直运动判断撞边陀螺仪绝对值
 | ------ | ------- | ---- | -------- | ------------- | ---------- |
 | 0x03   | 140     | 0x0C | 32 bit unsigned | 32 bit unsigned | 32 bit unsigned |
 
-kp：比例参数 * 1000，范围 0.01 ~ 1.0
+kp：比例参数 * 10000，范围 100 ~ 10000
 
-ki：积分参数 * 1000，0.001 ~ 0.01
+ki：积分参数 * 10000，1 ~ 100
 
-kd：微分参数 * 1000，0.0001 ~ 0.001
+kd：微分参数 * 10000，1 ~ 10
 
 #### MSP_GET_FAN_PID_RESULT 142
+
+> 需要同时打开`USE_UART_CONFIG`和`USE_UART_CONFIG_PID`功能
 
 **发送：**
 
@@ -856,6 +860,8 @@ target pressure：目标吸力
 real pressure：实时吸力
 
 #### MSP_GET_BATTERY_CHARGE_PARAM 146
+
+> 需打开`USE_BATT_CHARGE`功能，且硬件支持分立充电功能。
 
 **发送：**
 
