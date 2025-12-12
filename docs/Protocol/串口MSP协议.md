@@ -316,7 +316,8 @@ Simple response
 | 209 | MSP_SET_SPRAY | 控制喷水 |
 | 211 | MSP_SET_FAN | 控制风机 |
 | 214 | MSP_SET_MOTOR | 控制马达 |
-| 215 | MSP_SET_TRIGGER | 发送触发信号 |
+| 215 | MSP_SET_TRIGGER | 发送触发信号，发送和接收2个16位数据 |
+| 216 | MSP_SET_TRIGGER_2 | 发送触发信号，发送和接收4个16位数据 |
 | 220 | MSP_SET_PWMVALUE | 设置风机占比 |
 | 221 | MSP_SET_USE_FAN_LEVEL_DYNAMIC_COMP | 设置风机最大最小占比 |
 | 222 | MSP_SET_USE_FAN_OUTPUT_PID | 设置风机恒压占比 |
