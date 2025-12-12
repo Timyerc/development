@@ -875,7 +875,7 @@ real pressure：实时吸力
 | ------ | ------- | ---- | -------- | -------- | -------- | -------- |
 | 0x03   | 146     | 0x05 | 8 bit unsigned | 8 bit unsigned | 16 bit unsigned | 8 bit unsigned |
 
-charge state：充电状态，0未知，1慢充，2快充，3恒压，
+charge state：充电状态，0未知，1慢充，2快充，3恒压，4充满，
 
 battery voltage：电池电压 * 10
 
