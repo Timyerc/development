@@ -29,6 +29,8 @@
 | ------- | ---- | -----------| ----------- | ----------| ---------- | ----------  | ----------  | ----------  | ----------  |
 | 0x01    | 0x08 | 8 bit unsigned  | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned | 8 bit unsigned |
 
+desktopFun FLAG： 上位机识别无刷电机的标志
+
 #### OSP_HALL 0x66
 
 **发送：**
@@ -43,6 +45,8 @@
 | ------- | ---- | ---------------| 
 | 0x66    | 0x01 | 8 bit unsigned  |
 
+* hall state: hall当前值
+
 #### OSP_SYSTEM 0x6D
 
 **发送：**
@@ -52,11 +56,13 @@
 | 0x05   | 0x6D    | 0x00 |
 
 **接收：** 
-*** task  的类型是可变的不统一 ***
 
 | command | size | AverageSystemPeriod | task period | task period |
 | ------- | ---- | ---------------| --------------- | --------------|
 | 0x6D    | 0x0A | 16 bit unsigned  | 32 bit unsigned   | 32 bit unsigned |
+
+* AverageSystemPeriod ： 系统平均运行周期
+* task period： 对应任务执行周期，这个任务是可以变的使用时需要先确定是哪个task
 
 #### OSP_ANALOG 0x6F
 
@@ -80,9 +86,12 @@ NO response
 
 **接收：**
 
-| command | size | adc Sumavg | adc Vdc |
+| command | size |  sumavg value | vdc value |
 | ------- | ---- | ---------------| --------------- |
 | 0x70    | 0x04 | 16 bit unsigned  | 16 bit unsigned   |
+
+* sumavg value：回路电流，基本等于电机总耗电
+* vdc value ： 电机测量到的母线电压
 
 #### OSP_FAULT 0x71
 
@@ -98,6 +107,13 @@ NO response
 | ------- | ---- | ---------------|
 | 0x71    | 0x01 | 8 bit unsigned  |
 
+| fault | value |
+| ------ | ---- |
+| 捕获外部pwm失败 |  0  |
+| 电机电流异常    |  1  |
+| 母线电压异常    |  2  |
+| hall状态异常    |  3  |
+
 #### OSP_SET_PID 0x8D
 
 **发送：**
@@ -105,6 +121,10 @@ NO response
 | device | command | size |        kp        |        ki        |        kd        |
 | ------ | ------- | ---- | ---------------- | ---------------- | ---------------- |
 | 0x05   | 0x8D    | 0x0C | 32 bit unsigned  | 32 bit unsigned  | 32 bit unsigned  |
+
+* kp: pid比例项
+* ki：pid积分项
+* kd: pid微分项
 
 **接收：**
 
@@ -123,3 +143,6 @@ Simple response
 | command | size | target speed value | actual speed value |
 | ------- | ---- | ---------------| --------------- |
 | 0x8F    | 0x08 | 32 bit unsigned  | 32 bit unsigned   |
+
+* target speed value：捕获到的速度
+* actual speed value：电机实时采集到的速度
