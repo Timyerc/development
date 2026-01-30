@@ -130,6 +130,7 @@
    Hardware/元器件类别编码
    Hardware/IC Selector
    Hardware/遥控器型号说明
+   Hardware/使用脚本计算BOM成本
 
 .. toctree::
    :maxdepth: 2
