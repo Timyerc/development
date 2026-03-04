@@ -131,6 +131,7 @@
    Hardware/IC Selector
    Hardware/遥控器型号说明
    Hardware/使用脚本计算BOM成本
+   Hardware/使用脚本转换原始BOM到odoo格式
 
 .. toctree::
    :maxdepth: 2
