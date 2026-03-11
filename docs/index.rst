@@ -132,6 +132,7 @@
    Hardware/遥控器型号说明
    Hardware/使用脚本计算BOM成本
    Hardware/使用脚本转换原始BOM到odoo格式
+   Hardware/HS0861-2.4GHz天线性能报告(数据来源深圳市骏晔科技有限公司)
 
 .. toctree::
    :maxdepth: 2
