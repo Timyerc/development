@@ -133,6 +133,7 @@
    Hardware/使用脚本计算BOM成本
    Hardware/使用脚本转换原始BOM到odoo格式
    Hardware/FAQ
+   Hardware/测试治具文档模板
 
 .. toctree::
    :maxdepth: 2
