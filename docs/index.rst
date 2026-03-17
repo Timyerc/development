@@ -121,6 +121,7 @@
    :caption: 硬件
 
    Hardware/硬件开发流程
+   Hardware/基于模板创建新的硬件项目仓库
    Hardware/Kicad设计规范
    Hardware/Kicad使用脚本生成生产文件
    Hardware/Kicad封装添加3D模型
