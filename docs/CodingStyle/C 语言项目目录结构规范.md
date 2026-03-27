@@ -69,11 +69,14 @@
 #### 示例
 
 ```text
-imu_driver.c
-imu_driver.h
+app_state_machine.c
+app_state_machine.h
 
-state_machine.c
-state_machine.h
+move_control.c
+move_control.h
+
+move_collision_detect.c
+move_collision_detect.h
 ```
 
 ---
@@ -82,10 +85,9 @@ state_machine.h
 
 | 类型  | 示例  | 说明  |
 | --- | --- | --- |
-| 驱动层 | `imu_driver.c` | 硬件驱动 |
-| 控制层 | `motor_control.c` | 控制算法 |
+| 控制层 | `move_control.c` | 控制算法 |
+| 控制层 | `move_collison_detect.c` | 控制算法 |
 | 应用层 | `app_state_machine.c` | 业务逻辑 |
-| 通用模块 | `math_utils.c` | 工具函数 |
 
 ---
 
@@ -116,9 +118,8 @@ test.c              // ❌ 无具体含义
 #### 示例
 
 ```text
-motor_control.c      → motor_controlTest.cpp
-imu_driver.c         → imu_driverTest.cpp
-state_machine.c      → state_machineTest.cpp
+move_control.c      → move_controlTest.cpp
+app_state_machine.c      → app_state_machineTest.cpp
 ```
 
 ---
@@ -130,12 +131,12 @@ state_machine.c      → state_machineTest.cpp
 ```text
 src/
  ├── motor/
- │    ├── motor_control.c
- │    └── motor_control.h
+ │    ├── move_control.c
+ │    └── move_control.h
 
 tests/
- ├── motor/
- │    └── motor_controlTest.cpp
+ ├── move/
+ │    └── move_controlTest.cpp
 ```
 
 ---
