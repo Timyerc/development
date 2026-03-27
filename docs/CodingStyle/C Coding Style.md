@@ -252,6 +252,114 @@ pidStabilisationEnabled = (pidControllerState == PID_STABILISATION_ON) ? true : 
 
 这里，条件应括在大括号中，以便从左到右阅读时更容易发现三元运算符。
 
+### 函数长度（新增规范）
+
+#### 基本要求
+
+| 类型  | 行数限制 |
+| --- | --- |
+| 推荐长度 | ≤ 50 行 |
+| 最大允许 | ≤ 80 行 |
+| 强制拆分 | > 80 行 |
+
+#### 分层限制
+
+| 层级  | 最大行数 |
+| --- | --- |
+| HAL层 | ≤ 30 行 |
+| Driver层 | ≤ 30 行 |
+| Control层 | ≤ 40 行 |
+| Application层 | ≤ 80 行 |
+
+---
+
+### 函数拆分原则（新增）
+
+满足以下任一条件必须拆分函数：
+
+- 超过 80 行
+  
+- 包含多个逻辑阶段（如：采样 → 计算 → 控制 → 输出）
+  
+- 嵌套层级超过 3 层
+  
+- 存在重复代码
+  
+- 一屏无法完整显示（IDE 需要滚动）
+  
+---
+
+### 控制类函数规范（重点新增）
+
+适用于：FOC、PID、运动控制
+
+要求：
+
+- 函数 ≤ 40 行
+  
+- 必须拆分为步骤函数
+  
+
+示例：
+
+```c
+void focCurrentLoopRun(void)
+{
+    clarkeTransform();
+    parkTransform();
+    currentPiControl();
+    svpwmGenerate();
+}
+```
+
+---
+
+### 状态机函数规范（新增）
+
+```c
+void appStateMachineRun(void)
+{
+    switch (state)
+    {
+        case stateIdle_e:
+            handleIdle();
+            break;
+
+        case stateCleaning_e:
+            handleCleaning();
+            break;
+    }
+}
+```
+
+要求：
+
+- 每个状态独立函数
+  
+- 禁止在 `case` 内写大量逻辑
+  
+- 状态机函数 ≤ 80 行
+  
+---
+
+### 总结（新增）
+
+函数设计核心原则：
+
+> **短小、单一、清晰、可测试**
+
+工程实践标准：
+
+- 推荐 ≤ 50 行
+  
+- 超过 80 行必须拆分
+  
+- 控制类函数 ≤ 40 行
+  
+- 嵌套 ≤ 3 层
+  
+- 一个函数只做一件事
+
 ## Includes
 
 所有文件都必须包含其自己的依赖项，并且不依赖于包含的头文件中的包含项或某些文件需要先包含。
