@@ -1,4 +1,4 @@
-# EHDS-01-REMOTER-3 2.4G 通信协议
+# EHDS-01-REMOTER-7 2.4G 通信协议
 
 @HuYangYue 2026/4/11
 
